@@ -38,9 +38,11 @@ namespace NitroxServer_Subnautica
             SubnauticaUwePrefabFactory prefabFactory = new SubnauticaUwePrefabFactory(resourceAssets.LootDistributionsJson);
             containerBuilder.Register(c => prefabFactory).As<UwePrefabFactory>().SingleInstance();
 
-            Dictionary<TechTypeModel, IEntityBootstrapper> bootstrappersByTechType = new Dictionary<TechTypeModel, IEntityBootstrapper>();
-            bootstrappersByTechType[TechType.CrashHome.Model()] = new CrashFishBootstrapper();
-            bootstrappersByTechType[TechType.Reefback.Model()] = new ReefbackBootstrapper();
+            Dictionary<TechTypeModel, IEntityBootstrapper> bootstrappersByTechType = new Dictionary<TechTypeModel, IEntityBootstrapper>
+            {
+                [TechType.CrashHome.Model()] = new CrashFishBootstrapper(),
+                [TechType.Reefback.Model()] = new ReefbackBootstrapper()
+            };
 
             containerBuilder.Register(c => bootstrappersByTechType).SingleInstance();
 
